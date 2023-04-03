@@ -1,24 +1,17 @@
 import os
-import requests
 from datetime import datetime
+import json
 
 """
 Get all airport - country pairs
 from https://aviationstack.com
 """
 
-parameters = {"access_key": os.environ["MY_AVIA_TOKEN"]}
-
 
 def get_data():
     now = datetime.now().strftime("%Y-%m-%d_%H:%M")
-    api_result = requests.get("http://api.aviationstack.com/v1/flights", parameters)
-    print(api_result)
-    api_response = api_result.json()
-    print(api_response)
-    if api_response["error"]:
-        print("WARNING: API responded with error!")
-        return
+    with open("./mock_data/flights.json") as fd:
+        api_response = json.load(fd)
     pagination = api_response["pagination"]
     total = int(pagination["total"])
     limit = int(pagination["limit"])

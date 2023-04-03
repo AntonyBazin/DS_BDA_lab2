@@ -419,6 +419,8 @@ pip-selfcheck.json
 lab2.iml
 input/*
 output/*
+data/*
+mock_data/*
 input
 output
 helper_script.sh
