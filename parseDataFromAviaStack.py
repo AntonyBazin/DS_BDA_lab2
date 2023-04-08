@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 
 """
-Get all airport - country pairs
+Parse all airport - country pairs
 from https://aviationstack.com
 """
 

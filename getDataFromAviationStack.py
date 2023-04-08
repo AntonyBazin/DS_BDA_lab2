@@ -15,22 +15,22 @@ def get_data():
     api_result = requests.get("http://api.aviationstack.com/v1/flights", parameters)
     print(api_result)
     api_response = api_result.json()
-    print(api_response)
-    if api_response["error"]:
-        print("WARNING: API responded with error!")
-        return
+    # print(api_response)
+    # if api_response["error"]:
+    #     print("WARNING: API responded with error!")
+    #     return
     pagination = api_response["pagination"]
     total = int(pagination["total"])
     limit = int(pagination["limit"])
     with open("./data/routes" + now + ".txt", "w") as fd:
         for i in range(100):
             for result in api_response["data"]:
-                flight = result["flight"]["number"].strip()
-                dep_time = result["departure"]["scheduled"].strip()
-                arr_icao = result["arrival"]["icao"].strip()
-                dep_icao = result["departure"]["icao"].strip()
-                arr_tz = result["arrival"]["timezone"].strip()[:2]
-                dep_tz = result["departure"]["timezone"].strip()[:2]
+                flight = result["flight"]["number"].strip() if result["flight"]["number"] else "0000"
+                dep_time = result["departure"]["scheduled"].strip() if result["departure"]["scheduled"] else "Unknown"
+                arr_icao = result["arrival"]["icao"].strip() if result["arrival"]["icao"] else "XXXX"
+                dep_icao = result["departure"]["icao"].strip() if result["departure"]["icao"] else "XXXX"
+                arr_tz = result["arrival"]["timezone"].strip()[:2] if result["arrival"]["timezone"] else "XX"
+                dep_tz = result["departure"]["timezone"].strip()[:2] if result["departure"]["timezone"] else "XX"
 
                 fd.write(
                     flight
