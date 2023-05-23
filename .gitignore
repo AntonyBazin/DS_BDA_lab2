@@ -424,3 +424,6 @@ mock_data/*
 input
 output
 helper_script.sh
+
+spark-2.3.1-bin*
+
